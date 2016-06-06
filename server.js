@@ -3,13 +3,24 @@
  */
 
 var express = require('express');
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
+var config = require('./config');
 
 var app = express();
 
-app.listen(0000, function(err){
-    if(err){
-        throw err;
-    }
+app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.json());
+app.use(morgan('dev'));
 
-    console.log('Your server is at your service on port 0000');
-})
+app.get('*', function(req,res){
+    res.sendFile(__dirname + '/public/views/index.html');
+});
+
+app.listen(config.port, function(err){
+    if(err){
+        console.log(err);
+    }else{
+        console.log('Your server is at your service on port 4000');
+    }
+});

@@ -4,7 +4,7 @@
 
 module.exports ={
 
-    "database" : "",
+    "database" : "mongodb://root:abc123@ds041432.mlab.com:41432/userstory",
     "port" : process.env.PORT || 4000,
     "secretKey" : "finye2016"
 

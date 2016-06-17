@@ -21,12 +21,17 @@ mongoose.connect(config.database, function(err){
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
+//files in the public folder will be render
+app.use(express.static(__dirname + '/public'));
 
 var api = require('./app/routes/api')(app, express);
 app.use('/api', api);
 
 app.get('*', function(req,res){
-    res.sendFile(__dirname + '/public/views/index.html');
+    res.sendFile(__dirname + '/public/app/views/index.html');
+
+    console.log(__dirname);
+
 });
 
 app.listen(config.port, function(err){
